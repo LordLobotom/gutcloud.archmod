@@ -47,6 +47,34 @@ Behavior notes:
 4. If you want auth, enable Google provider in Supabase Auth.
 5. If you want to protect data, enable RLS and add policies (examples are included in the SQL file as comments).
 
+## Docker Compose
+Build and run the app:
+
+```bash
+docker compose up --build
+```
+
+### Supabase Init (Docker)
+The compose file includes a `seed` profile that runs the init script inside a build stage with full source.
+
+Run schema + seed:
+
+```bash
+docker compose --profile seed run --rm archmod-seed
+```
+
+To wipe and reseed:
+
+```bash
+docker compose --profile seed run --rm archmod-seed pnpm supabase:init -- --reset
+```
+### Supabase Init Script (Optional)
+If you have `SUPABASE_DB_URL` set in `.env`, you can initialize the schema and seed mock data:
+
+```bash
+pnpm supabase:init -- --reset
+```
+
 ## Auth Modes
 - `disabled`: No auth UI, no session tracking.
 - `optional`: Auth UI is available but not required to use the app. Best for demos.
@@ -69,4 +97,3 @@ pnpm lint
 ## Notes for Production
 - Supabase writes are performed client-side with the anon key. Enable RLS and policies to protect data.
 - If `AUTH_MODE=optional` and RLS requires authentication, unauthenticated users will see errors and the app will fall back to local data.
-

@@ -24,6 +24,15 @@ services:
     networks:
       - traefik-public
 
+  archmod-seed:
+    build:
+      context: .
+      target: seed
+    env_file:
+      - .env
+    profiles:
+      - seed
+
 networks:
   traefik-public:
     external: true
