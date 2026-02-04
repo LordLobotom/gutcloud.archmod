@@ -1,0 +1,29 @@
+services:
+  archmod-web:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+        NEXT_PUBLIC_AUTH_MODE: ${NEXT_PUBLIC_AUTH_MODE}
+        NEXT_PUBLIC_DATA_SOURCE: ${NEXT_PUBLIC_DATA_SOURCE}
+        NEXT_PUBLIC_ENABLE_SAMPLE_DATA: ${NEXT_PUBLIC_ENABLE_SAMPLE_DATA}
+    container_name: archmod-web
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      PORT: ${PORT:-3000}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-public"
+      - "traefik.http.routers.archmod.rule=Host(`archmod.${TRAEFIK_DOMAIN}`)"
+      - "traefik.http.routers.archmod.entrypoints=websecure"
+      - "traefik.http.routers.archmod.tls.certresolver=letsencrypt"
+      - "traefik.http.services.archmod.loadbalancer.server.port=3000"
+    networks:
+      - traefik-public
+
+networks:
+  traefik-public:
+    external: true
