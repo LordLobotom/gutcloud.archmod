@@ -42,11 +42,13 @@ begin
 end;
 $$ language plpgsql;
 
-create trigger if not exists entities_updated_at
+drop trigger if exists entities_updated_at on public.entities;
+create trigger entities_updated_at
 before update on public.entities
 for each row execute function public.set_updated_at();
 
-create trigger if not exists relationships_updated_at
+drop trigger if exists relationships_updated_at on public.relationships;
+create trigger relationships_updated_at
 before update on public.relationships
 for each row execute function public.set_updated_at();
 
