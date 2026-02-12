@@ -72,14 +72,16 @@ function EntityNodeComponent({ data }: NodeProps<EntityNodeData>) {
   return (
     <>
       <Handle
+        id="target-top"
         type="target"
         position={Position.Top}
-        className="!w-2 !h-2 !bg-muted-foreground/50 !border-0"
+        className="!w-2 !h-2 !bg-muted-foreground/50 !border-0 !z-10"
       />
       <Handle
+        id="target-left"
         type="target"
         position={Position.Left}
-        className="!w-2 !h-2 !bg-muted-foreground/50 !border-0"
+        className="!w-2 !h-2 !bg-muted-foreground/50 !border-0 !z-10"
       />
       <div
         className={cn(
@@ -145,14 +147,16 @@ function EntityNodeComponent({ data }: NodeProps<EntityNodeData>) {
         </div>
       </div>
       <Handle
+        id="source-bottom"
         type="source"
         position={Position.Bottom}
-        className="!w-2 !h-2 !bg-muted-foreground/50 !border-0"
+        className="!w-2 !h-2 !bg-muted-foreground/50 !border-0 !z-10"
       />
       <Handle
+        id="source-right"
         type="source"
         position={Position.Right}
-        className="!w-2 !h-2 !bg-muted-foreground/50 !border-0"
+        className="!w-2 !h-2 !bg-muted-foreground/50 !border-0 !z-10"
       />
     </>
   )

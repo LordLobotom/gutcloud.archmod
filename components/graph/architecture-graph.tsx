@@ -129,7 +129,7 @@ function ArchitectureGraphInner({
       
       return true
     })
-  }, [filters, zoomAllowedTypes])
+  }, [entities, filters, zoomAllowedTypes])
 
   const focusEntityIds = useMemo(() => {
     if (!selectedEntityId) return null
@@ -353,7 +353,7 @@ function ArchitectureGraphInner({
         onConnect={onConnect}
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
-        connectionMode={ConnectionMode.Loose}
+        connectionMode={ConnectionMode.Strict}
         fitView
         fitViewOptions={{ padding: 0.2 }}
         minZoom={0.05}
